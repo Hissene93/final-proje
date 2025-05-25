@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid bg-light py-5">
+    <div class="container text-center">
+        <h1 class="display-4">Bienvenue sur le Système de Gestion Scolaire</h1>
+        <p class="lead">Une solution complète pour la gestion des étudiants, des cours et des notes</p>
+        <hr class="my-4">
+        {% if not current_user.is_authenticated %}
+            <div class="d-flex justify-content-center gap-3">
+                <a class="btn btn-primary btn-lg" href="{{ url_for('auth.login') }}" role="button">Se connecter</a>
+                <a class="btn btn-outline-primary btn-lg" href="{{ url_for('auth.register') }}" role="button">S'inscrire</a>
+            </div>
+        {% else %}
+            <a class="btn btn-primary btn-lg" href="{{ url_for('main.dashboard') }}" role="button">Accéder au tableau de bord</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                    <h3 class="card-title">Gestion des Étudiants</h3>
+                    <p class="card-text">Inscription, suivi et gestion complète des dossiers étudiants.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-book fa-3x mb-3 text-success"></i>
+                    <h3 class="card-title">Gestion des Cours</h3>
+                    <p class="card-text">Création et gestion des cours, attribution aux enseignants.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-bar fa-3x mb-3 text-info"></i>
+                    <h3 class="card-title">Suivi des Notes</h3>
+                    <p class="card-text">Saisie des notes, calcul des moyennes et statistiques.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

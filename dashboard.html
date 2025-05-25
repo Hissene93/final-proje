@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Tableau de Bord Enseignant</h2>
+    
+    <div class="card">
+        <div class="card-header">
+            <h5>Mes Cours</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom du Cours</th>
+                            <th>Crédits</th>
+                            <th>Nombre d'Étudiants</th>
+                            <th>Moyenne</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for course in courses %}
+                        <tr>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.credits }}</td>
+                            <td>{{ course.grades|length }}</td>
+                            <td>
+                                {% if course.grades %}
+                                    {{ (course.grades|sum(attribute='grade') / course.grades|length)|round(2) }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('main.teacher_course', course_id=course.id) }}" class="btn btn-sm btn-primary">
+                                    Voir les notes
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
